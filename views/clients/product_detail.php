@@ -27,42 +27,47 @@
             </div>
         </div>
     </nav>
-    <div class="banner">
-        <img src="https://www.lexus.com.vn/content/dam/lexus-v3-blueprint/models/sedan/es/mlp/my22/gallery/exterior/lexus-es-gallery-ext-08-d.jpg" alt="">
-    </div>
-    <div class="back">
-        <div class="title">
-            <h2 style="margin-left: 300px;">DÒNG XE LEXUS ES</h2>
-        </div>
-        <div class="content1">
-            <img class="border border-3" src="https://www.lexus.com.vn/content/dam/lexus-v3-blueprint/models/sedan/es/mlp/my22/gallery/exterior/lexus-es-gallery-ext-07-d.jpg" alt="">
-            <div>
-                <h4 class="fw-semibold" style="margin-left: 15px;">Từ năm 1989, mẫu xe Lexus ES không ngừng được cải tiến và nâng tầm. Đến nay, chiếc Sedan đã trở nên yên tĩnh và sang trọng hơn bao giờ hết. Hiệu suất và thiết kế của xe đã được tinh chỉnh đạt đến một đẳng cấp mới.</h4>
-                <p>Chính tinh thần tiên phong này đã cho ra đời LS 400, chiếc xe tạo nên làn sóng trong thế giới ô-tô ngay khi ra mắt và được vinh danh Lexus trong lịch sử.</p>
+    <div class="container-fluid pt-4 vh-100 vw-100 bg-dark text-white">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6 col-lg-5 px-4">
+                <h1><?= $product['name'] ?></h1>
+                <h4 class="fw-semibold mb-3"><?= $product['description'] ?></h4>
+                <p class="fw-semibold">Giá: <?= $product['price'] ?> VNĐ</p>
+                <p class="fw-semibold">Trạng thái: <?= $product['status'] ? 'Còn hàng' : 'Hết hàng' ?></p>
+                <p class="fw-semibold">Màu sắc: <?= $product['color_name'] ?></p>
+                <p class="fw-semibold">Thương hiệu: <?= $product['brand_name'] ?></p>
+                <p class="fw-semibold">Số lượng: <?= $product['quantity'] ?></p>
+            </div>
+            <div class="col-md-6 col-lg-5 text-center">
+                <img class="img-fluid" src="<?= $product['image'] ?>" alt="">
             </div>
         </div>
     </div>
-    <h4>KHÁM PHÁ XE LEXUS ES</h4>
     <div class="content">
 
-        <div>
-            <h6>Lexus ES 250</h6>
-            <p>Giá xe từ 2,360,000,000 VNĐ</p>
+
+        <img src="https://www.lexus.com.vn/content/dam/lexus-v3-blueprint/models/sedan/es/es-300h/my22/navigation/lexus-es300h.jpg" alt="" class="img-fluid">
+        <div class="info">
+            <div>
+                <h6><?= $product['name'] ?></h6>
+                <p>Giá xe từ <?= $product['price'] ?> VNĐ</p>
+            </div>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h6>204 HP</h6>
+                    <p>Công suất cực đại</p>
+                </div>
+                <div>
+                    <h6>9.1 sec</h6>
+                    <p>Khả năng tăng tốc</p>
+                </div>
+                <div>
+                    <h6>6.8 L/ 100km</h6>
+                    <p>Mức tiêu thụ nhiên liệu</p>
+                </div>
+            </div>
         </div>
-        <img src="https://www.lexus.com.vn/content/dam/lexus-v3-blueprint/models/sedan/es/es-300h/my22/navigation/lexus-es300h.jpg" alt="">
-        <div>
-            <h6>204 HP</h6>
-            <p>Công suất cực đại</p>
-        </div>
-        <div>
-            <h6>9.1 sec</h6>
-            <p>Khả năng tăng tốc</p>
-        </div>
-        <div>
-            <h6>6.8 L/ 100km</h6>
-            <p>Mức tiêu thụ nhiên liệu</p>
-        </div>
-        <div class="them">
+        <div class="d-flex flex-column justify-content-center mt-3 gap-2">
             <button type="button" class="btn btn-secondary">Đăng Ký Lái Thử</button>
             <button type="button" class="btn btn-secondary">Thêm Vào Mục Yêu Thích</button>
         </div>
