@@ -1,0 +1,9 @@
+.loc_SP {
+    max-width: 240px;
+}
+
+.contents1 {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
