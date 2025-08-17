@@ -33,6 +33,9 @@ match ($act) {
     // Thêm/xóa sản phẩm yêu thích
     'toggle-favorite' => (new ClientController())->toggleFavorite(),
 
+    // Trang sản phẩm yêu thích
+    'favourite' => (new ClientController())->favourite(),
+
     // Trang đăng nhập
     'login' => (new AuthController())->login(),
 

@@ -16,7 +16,7 @@ $user_id = $_SESSION['user_id'] ?? null;
             <a class="nav-link active" aria-current="page" href="#main-content">Sản phẩm</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Xe ưa thích</a>
+            <a class="nav-link" href="?act=favourite">Xe ưa thích</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Xe đã đặt</a>

@@ -46,6 +46,8 @@ class ClientController
             exit;
         }
 
+        $isFavorius = $this->favoriusModel->isFavorite($id);
+
         $title = "Chi tiết sản phẩm";
         $view = "clients/product_detail";
         require_once PATH_VIEW_MAIN;
@@ -53,15 +55,28 @@ class ClientController
 
     public function toggleFavorite()
     {
-        // if (empty($_SESSION['user_id']) || empty($_GET['product_id'])) {
-        //     echo json_encode(['status' => 'error', 'message' => 'Có lỗi xảy ra, vui lòng thử lại sau']);
-        //     return;
-        // }
-
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: ?act=login");
+            exit;
+        }
         $product_id = $_GET['product_id'];
         $this->favoriusModel->toggleFavorite($product_id);
         $redirect = $_GET['redirect'] ?? '?act=/';
         header("Location: $redirect");
         exit;
+    }
+
+    public function favourite()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: ?act=login");
+            exit;
+        }
+        $userId = $_SESSION['user_id'];
+        $products = $this->favoriusModel->getFavoritesByUserId($userId);
+        $favoriusModel = $this->favoriusModel;
+        $title = "Sản phẩm yêu thích";
+        $view = "clients/favourite";
+        require_once PATH_VIEW_MAIN;
     }
 }

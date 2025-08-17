@@ -42,7 +42,9 @@
 
                 <div class="d-flex align-items-center mt-3 gap-3">
                     <button type="button" class="btn btn-secondary fs-6">Đăng Ký Lái Thử</button>
-                    <a href="#" class=" btn-outline-danger btn-sm"><i class="fa-regular fa-heart"></i></a>
+                    <a href="?act=toggle-favorite&product_id=<?= $product['id'] ?>&redirect=<?= urlencode($_SERVER['REQUEST_URI']) ?>#product-<?= $product['id'] ?>" class=" btn-outline-danger btn-sm">
+                        <i class="<?= ($isFavorius) ? "fa-solid" : "fa-regular" ?>  fa-heart"></i>
+                    </a>
                 </div>
             </div>
             <div class="col-md-6 col-lg-5 text-center">

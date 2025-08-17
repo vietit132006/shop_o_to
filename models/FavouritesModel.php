@@ -45,4 +45,15 @@ class FavouritesModel
             return true;
         }
     }
+
+    public function getFavoritesByUserId($userId)
+    {
+        $stmt = $this->conn->prepare("
+        SELECT p.* FROM favourite f
+        JOIN products p ON f.product_id = p.id
+        WHERE f.user_id = :user_id ORDER BY f.created_at DESC
+        ");
+        $stmt->execute([':user_id' => $userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
