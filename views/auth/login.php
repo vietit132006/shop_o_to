@@ -12,7 +12,7 @@
          </div>
          <div>
             <button class="btn btn-secondary w-100 mb-2" type="submit">Đăng nhập</button>
-            <button class="btn btn-outline-secondary w-100" type="submit">Đăng ký</button>
+            <a class="btn btn-outline-secondary w-100" href="?act=sign_up">Đăng ký</a>
          </div>
          <?php if (isset($error)): ?>
             <div class="alert alert-danger" role="alert">

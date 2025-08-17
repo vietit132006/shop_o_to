@@ -41,4 +41,7 @@ match ($act) {
 
     // Trang đăng xuất
     'logout' => (new AuthController())->logout(),
+
+    // Trang đăng ký
+    'sign_up' => (new AuthController())->signUp(),
 };

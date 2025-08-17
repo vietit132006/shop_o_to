@@ -8,7 +8,7 @@ class UserModel
         $this->conn = connectDB();
     }
 
-    // Login method
+    // Đăng nhập người dùng
     public function login($username, $password)
     {
         $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = :username OR phone = :username LIMIT 1");
@@ -25,16 +25,31 @@ class UserModel
         return false;
     }
 
-    // Logout method
+    // Đăng xuất
     public function logout()
     {
         session_unset();
         session_destroy();
     }
 
-    // Check if user is logged in
-    public function isLoggedIn()
+    // Đăng ký người dùng
+    public function signUp($name, $email, $phone, $address, $password)
     {
-        return isset($_SESSION['user_id']);
+        // Kiểm tra xem người dùng đã tồn tại chưa
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = :email OR phone = :phone LIMIT 1");
+        $stmt->execute([':email' => $email, ':phone' => $phone]);
+        if ($stmt->rowCount() > 0) {
+            return false; // Người dùng đã tồn tại
+        }
+
+        // Nếu chưa tồn tại, tiến hành đăng ký
+        $stmt = $this->conn->prepare("INSERT INTO users (name, email, phone, address, password) VALUES (:name, :email, :phone, :address, :password)");
+        return $stmt->execute([
+            ':name' => $name,
+            ':email' => $email,
+            ':phone' => $phone,
+            ':address' => $address,
+            ':password' => $password
+        ]);
     }
 }
