@@ -15,6 +15,7 @@ require_once './models/ProductModel.php';
 require_once './models/BrandModel.php';
 require_once './models/ColorModel.php';
 require_once './models/UserModel.php';
+require_once './models/FavouritesModel.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -28,6 +29,9 @@ match ($act) {
 
     // Trang chi tiết sản phẩm
     'product-detail' => (new ClientController())->detail(),
+
+    // Thêm/xóa sản phẩm yêu thích
+    'toggle-favorite' => (new ClientController())->toggleFavorite(),
 
     // Trang đăng nhập
     'login' => (new AuthController())->login(),

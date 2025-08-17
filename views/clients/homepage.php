@@ -1,3 +1,8 @@
+<?php
+$user_id = $_SESSION['user_id'] ?? null;
+?>
+
+
 <div>
   <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary">
     <div class="container-fluid">
@@ -28,7 +33,7 @@
           </span>
         <?php endif; ?>
         <a href="<?= (isset($_SESSION['username'])) ? "?act=register" : "?act=login" ?>" class="btn btn-secondary"><i class="fa-solid fa-shop mx-2"></i>Cửa hàng của bạn</a>
-        <?php if (isset($_SESSION['username'])): ?>
+        <?php if (isset($_SESSION['user_id'])): ?>
           <a href="?act=logout" class="btn btn-outline-secondary ms-2"><i class="fa-solid fa-arrow-right-from-bracket mx-2"></i> Đăng xuất</a>
         <?php else: ?>
           <a href="?act=login" class="btn btn-outline-secondary me-2">
@@ -129,18 +134,27 @@
           <?php if (!empty($products)): ?>
 
             <div class="row row-cols-1 row-cols-md-3 g-4">
-              <?php foreach ($products as $product): ?>
-                <div class="col">
-                  <div class="card h-100 shadow-sm" style="cursor:pointer;" onclick="window.location.href='?act=product-detail&id=<?= $product['id'] ?>'">
-                    <img src="<?= $product['image'] ?>" class="card-img-top img-fluid" alt="<?= $product['name'] ?>" style="height:200px; object-fit:cover;">
+              <?php foreach ($products as $product):
+                $isFavorius = $favoriusModel->isFavorite($product['id']);
+              ?>
+                <div class="col" id="product-<?= $product['id'] ?>">
+                  <div class="card h-100 shadow-sm">
+                    <img src="<?= $product['image'] ?>" class="card-img-top img-fluid" alt="<?= $product['name'] ?>" style="height:200px; object-fit:cover;cursor:pointer;"
+                      onclick="window.location.href='?act=product-detail&id=<?= $product['id'] ?>'">
                     <div class="card-body">
-                      <span class="badge rounded-pill text-bg-primary"><?= ($product['quantity'] > 0) ? "Còn hàng" : "Đã hết hàng"; ?></span>
-                      <span class="badge rounded-pill text-bg-danger"><?= ($product['status'] == 1) ? "New" : "Old"; ?></span>
-                      <h5 class="card-title mt-2"><?= $product['name'] ?></h5>
-                      <p class="card-text text-danger fw-bold"><?= $product['price'] ?> VNĐ</p>
+
+
+                      <div class='mb-3' style="cursor:pointer;" onclick="window.location.href='?act=product-detail&id=<?= $product['id'] ?>'">
+                        <span class="badge rounded-pill text-bg-primary"><?= ($product['quantity'] > 0) ? "Còn hàng" : "Đã hết hàng"; ?></span>
+                        <span class="badge rounded-pill text-bg-danger"><?= ($product['status'] == 1) ? "New" : "Old"; ?></span>
+                        <h5 class="card-title mt-2"><?= $product['name'] ?></h5>
+                        <p class="card-text text-danger fw-bold"><?= number_format($product['price'], 0, ',', '.') ?> VNĐ</p>
+                      </div>
                       <div class="d-flex justify-content-between">
-                        <a href="#" class="btn btn-primary btn-sm " onclick="event.stopPropagation();">Liên hệ ngay</a>
-                        <a href="#" class=" btn-outline-danger btn-sm" onclick="event.stopPropagation();"><i class="fa-regular fa-heart"></i></a>
+                        <a class="btn btn-primary btn-sm ">Liên hệ ngay</a>
+                        <a href="?act=toggle-favorite&product_id=<?= $product['id'] ?>&redirect=<?= urlencode($_SERVER['REQUEST_URI']) ?>#product-<?= $product['id'] ?>" class=" btn-outline-danger btn-sm">
+                          <i class="<?= ($isFavorius) ? "fa-solid" : "fa-regular" ?>  fa-heart"></i>
+                        </a>
                       </div>
                     </div>
                   </div>

@@ -5,12 +5,14 @@ class ClientController
     public $brandModel;
     public $colorModel;
     public $productModel;
+    public $favoriusModel;
 
     public function __construct()
     {
         $this->brandModel = new BrandModel();
         $this->colorModel = new ColorModel();
         $this->productModel = new ProductModel();
+        $this->favoriusModel = new FavouritesModel();
     }
 
     public function index()
@@ -21,6 +23,7 @@ class ClientController
         $brandIds = $_GET['brand_id'] ?? []; // Mảng brand_id
         $colorIds = $_GET['color_id'] ?? []; // Mảng color_id
 
+        $favoriusModel = $this->favoriusModel;
         $brands = $this->brandModel->getAll();
         $colors = $this->colorModel->getAll();
         $products = $this->productModel->getProducts($keyword, $sort, $status, $brandIds, $colorIds);
@@ -46,5 +49,19 @@ class ClientController
         $title = "Chi tiết sản phẩm";
         $view = "clients/product_detail";
         require_once PATH_VIEW_MAIN;
+    }
+
+    public function toggleFavorite()
+    {
+        // if (empty($_SESSION['user_id']) || empty($_GET['product_id'])) {
+        //     echo json_encode(['status' => 'error', 'message' => 'Có lỗi xảy ra, vui lòng thử lại sau']);
+        //     return;
+        // }
+
+        $product_id = $_GET['product_id'];
+        $this->favoriusModel->toggleFavorite($product_id);
+        $redirect = $_GET['redirect'] ?? '?act=/';
+        header("Location: $redirect");
+        exit;
     }
 }
