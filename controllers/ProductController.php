@@ -13,7 +13,7 @@ class ProductController
     {
         $title = "Trang chủ";
         $thoiTiet = "Hôm nay trời có vẻ là mưa";
-        $view = 'clients/homepage';
+        $view = 'client/product_detail';
         require_once PATH_VIEW_MAIN;
     }
 }

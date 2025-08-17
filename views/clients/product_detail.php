@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Car Auto</a>
+            <a class="navbar-brand" href="<?= BASE_URL ?>">Car Auto</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
@@ -27,51 +27,28 @@
             </div>
         </div>
     </nav>
-    <div class="container-fluid pt-4 vh-100 vw-100 bg-dark text-white">
+    <div class="container-fluid pt-4 vh-100 vw-100 text-white" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.78));">
         <div class="row justify-content-center align-items-center">
-            <div class="col-md-6 col-lg-5 px-4">
-                <h1><?= $product['name'] ?></h1>
-                <h4 class="fw-semibold mb-3"><?= $product['description'] ?></h4>
-                <p class="fw-semibold">Giá: <?= $product['price'] ?> VNĐ</p>
-                <p class="fw-semibold">Trạng thái: <?= $product['status'] ? 'Còn hàng' : 'Hết hàng' ?></p>
-                <p class="fw-semibold">Màu sắc: <?= $product['color_name'] ?></p>
-                <p class="fw-semibold">Thương hiệu: <?= $product['brand_name'] ?></p>
-                <p class="fw-semibold">Số lượng: <?= $product['quantity'] ?></p>
+            <div class="col-lg-5  ">
+                <p class="fw-bold fs-1" style="color: rgb(155, 155, 155)"><?= $product['name'] ?></p>
+                <p class="fs-6 fst-italic">- <?= $product['description'] ?> -</p>
+                <p class="fs-5 fw-normal">Trạng thái: <?= $product['status'] ? 'Còn hàng' : 'Hết hàng' ?></p>
+                <p class="fs-5 fw-normal">Màu sắc: <?= $product['color_name'] ?></p>
+                <p class="fs-5 fw-normal">Thương hiệu: <?= $product['brand_name'] ?></p>
+                <p class="fs-5 fw-normal">Số lượng: <?= $product['quantity'] ?></p>
+                <p class="fst-italic fw-bold fs-5 text-danger">Giá: <?= number_format($product['price'], 0, ',', '.') ?> VNĐ</p>
+
+                <p class="fs-6 fst-italic">- <?= $product['brand_description'] ?> -</p>
+
+                <div class="d-flex align-items-center mt-3 gap-3">
+                    <button type="button" class="btn btn-secondary fs-6">Đăng Ký Lái Thử</button>
+                    <a href="#" class=" btn-outline-danger btn-sm"><i class="fa-regular fa-heart"></i></a>
+                </div>
             </div>
             <div class="col-md-6 col-lg-5 text-center">
-                <img class="img-fluid" src="<?= $product['image'] ?>" alt="">
+                <img class="img-fluid mt-80" src="<?= $product['image'] ?>" alt="">
             </div>
         </div>
-    </div>
-    <div class="content">
-
-
-        <img src="https://www.lexus.com.vn/content/dam/lexus-v3-blueprint/models/sedan/es/es-300h/my22/navigation/lexus-es300h.jpg" alt="" class="img-fluid">
-        <div class="info">
-            <div>
-                <h6><?= $product['name'] ?></h6>
-                <p>Giá xe từ <?= $product['price'] ?> VNĐ</p>
-            </div>
-            <div class="d-flex justify-content-between">
-                <div>
-                    <h6>204 HP</h6>
-                    <p>Công suất cực đại</p>
-                </div>
-                <div>
-                    <h6>9.1 sec</h6>
-                    <p>Khả năng tăng tốc</p>
-                </div>
-                <div>
-                    <h6>6.8 L/ 100km</h6>
-                    <p>Mức tiêu thụ nhiên liệu</p>
-                </div>
-            </div>
-        </div>
-        <div class="d-flex flex-column justify-content-center mt-3 gap-2">
-            <button type="button" class="btn btn-secondary">Đăng Ký Lái Thử</button>
-            <button type="button" class="btn btn-secondary">Thêm Vào Mục Yêu Thích</button>
-        </div>
-
     </div>
     <footer>
         <p>Copyright © Lexus 2025 <br>Thông số kỹ thuật có thể thay đổi tùy theo thị trường.

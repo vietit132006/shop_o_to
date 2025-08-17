@@ -13,11 +13,6 @@ h6 {
     color: rgb(155, 155, 155);
 }
 
-.back {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.78));
-    padding: 100px 0px;
-
-}
 
 .content1 {
     text-align: justify;

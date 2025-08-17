@@ -55,7 +55,8 @@ class ProductModel
         $query = "
         SELECT
             p.*, 
-            b.name AS brand_name, 
+            b.name AS brand_name,
+            b.description AS brand_description,
             c.name AS color_name
         FROM products p
         LEFT JOIN brands b ON p.brand_id = b.id
