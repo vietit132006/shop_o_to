@@ -1,22 +1,44 @@
 <div>
-  <nav class="navbar sticky-top bg-body-tertiary" data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="#"><i class="fa-solid fa-car"></i></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button> -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="#main-content">Sản phẩm</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>opkoouuuuu
+            <a class="nav-link" href="#">Xe ưa thích</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Xe đã đặt</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-disabled="true">Disabled</a>
+          </li>
         </ul>
       </div>
-    </div>
+      <div class="d-flex gap-2">
+        <?php if (isset($_SESSION['name'])): ?>
+          <span class="navbar-text text-secondary">
+            Xin chào, <?= htmlspecialchars($_SESSION['name']) ?>
+          </span>
+        <?php endif; ?>
+        <a href="<?= (isset($_SESSION['username'])) ? "?act=register" : "?act=login" ?>" class="btn btn-secondary"><i class="fa-solid fa-shop mx-2"></i>Cửa hàng của bạn</a>
+        <?php if (isset($_SESSION['username'])): ?>
+          <a href="?act=logout" class="btn btn-outline-secondary ms-2"><i class="fa-solid fa-arrow-right-from-bracket mx-2"></i> Đăng xuất</a>
+        <?php else: ?>
+          <a href="?act=login" class="btn btn-outline-secondary me-2">
+            <i class="fa-solid fa-user mx-2"></i> Đăng nhập
+          </a>
+        <?php endif; ?>
+
+      </div>
   </nav>
+
   <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" data-bs-pause="false">
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -30,11 +52,11 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid p-3">
+  <div class="container-fluid p-3" id="main-content">
     <div class="row">
       <div class="col-md-2 col-lg-3">
         <h5>Bộ lọc sản phẩm</h5>
-        <form method="GET" action="" id="filter-form">
+        <form method="GET" action="#main-content" id="filter-form">
           <div class="filter">
             <div class="mb-3">
               <label class="form-label">Tên sản phẩm</label>
