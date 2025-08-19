@@ -58,5 +58,17 @@ match ($act) {
     'dashboard' => (new AdminController())->index(),
 
     // Trang quản lý sản phẩm
-    'manage_products' => (new AdminController())->manageProducts(),
+    'manage-product' => (new AdminController())->manageProducts(),
+
+    // Xóa sản phẩm
+    'delete-product' => (new AdminController())->deleteProduct(),
+
+    // Lưu sản phẩm (cập nhật thông tin sản phẩm)
+    'save-product' => (new AdminController())->saveProduct(),
+
+    // Trang thêm sản phẩm
+    'add-product' => (new AdminController())->addProduct(),
+
+    // Tạo sản phẩm mới
+    'create-product' => (new AdminController())->createProduct(),
 };

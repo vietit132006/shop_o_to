@@ -47,72 +47,65 @@
 
     <div class="register-box ">
         <div class="p-3 mb-2 bg-info text-bg-dark  bg-black bg-success p-2 bg-opacity-10 rounded-2">
-            <h2 class="d-flex justify-content-center ">Chỉnh sửa thông tin sản phẩm</h2>
-            <form>
+            <h2 class="d-flex justify-content-center "><?= $isCreate ? 'Tạo sản phẩm' : 'Cập nhật sản phẩm' ?></h2>
+            <form action="<?= $isCreate ? 'act=create-product' : '?act=save-product' ?>" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<?= htmlspecialchars($product['id'] ?? '') ?>">
                 <div class="mb-3 ">
-                    <label for="exampleFormControlInput1" class="form-label">Tên sản phẩm</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Sản phẩm">
+                    <label for="name" class="form-label">Tên sản phẩm</label>
+                    <input name="name" class="form-control" id="name" placeholder="Sản phẩm" value="<?= htmlspecialchars($product['name'] ?? '') ?>" required>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Loại</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Loại">
+                    <label for="status" class="form-label">Tình trạng</label>
+                    <select class="form-select" name="status" id="status" required>
+                        <option value="1" <?= (isset($product['status']) && $product['status'] == 1) ? 'selected' : '' ?>>Mới</option>
+                        <option value="2" <?= (isset($product['status']) && $product['status'] == 2) ? 'selected' : '' ?>>Cũ</option>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="file" class="form-label">Ảnh</label>
-                    <input type="file" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    <input type="file" class="form-control" id="file" name="image" required>
                 </div>
                 <div class="mb-3">
-
-                    <label for="exampleFormControlInput1" class="form-label">Thương hiệu</label>
-                    <select name="brand" class="input-group mb-3 form-control " id="">
-                        <option value="">Thương hiệu</option>
-                        <option value="">Toyota</option>
-                        <option value="">Vinfast</option>
-                        <option value="">Lexus</option>
-                        <option value="">Honda</option>
-                        <option value="">Mercedes</option>
+                    <label for="brand" class="form-label">Thương hiệu</label>
+                    <select name="brand_id" class="input-group mb-3 form-control" id="brand" required>
+                        <?php foreach ($brands as $brand): ?>
+                            <option value="<?= $brand['id'] ?>" <?= (isset($product['brand_id']) && $product['brand_id'] == $brand['id']) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($brand['name']) ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Màu xe</label>
-                    <select name="brand" class="input-group mb-3 form-control " id="">
-                        <option value="">Màu</option>
-                        <option value="">Xanh</option>
-                        <option value="">Đỏ</option>
-                        <option value="">Tím</option>
-                        <option value="">Vàng</option>
-                        <option value="">Trắng</option>
+                    <label for="color" class="form-label">Màu xe</label>
+                    <select name="color_id" class="input-group mb-3 form-control" id="color" required>
+                        <?php foreach ($colors as $color): ?>
+                            <option value="<?= $color['id'] ?>" <?= (isset($product['color_id']) && $product['color_id'] == $color['id']) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($color['name']) ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Giá tiền</label>
-                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="VNĐ">
+                    <label for="price" class="form-label">Giá tiền</label>
+                    <input name="price" type="number" class="form-control" id="price" placeholder="VNĐ" value="<?= htmlspecialchars($product['price'] ?? '') ?>" required>
                 </div>
                 <div class="mb-3">
-                    <label for="inputPassword5" class="form-label">Số lượng</label>
-                    <input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Số lượng">
+                    <label for="quantity" class="form-label">Số lượng</label>
+                    <input name="quantity" type="number" id="quantity" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Số lượng" required value="<?= htmlspecialchars($product['quantity'] ?? '') ?>">
                 </div>
 
-                <div class="d-flex flex-column mb-3">
-                    <label for="Status">Tình trạng</label>
-                    <select class="form-select" name="" id="">
-                        <option value="">Còn hàng</option>
-                        <option value="">Hết hàng</option>
-                    </select>
-                </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Miêu tả sản phẩm</label>
-                    <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Miêu tả">
+                    <label for="description" class="form-label">Miêu tả sản phẩm</label>
+                    <input type="text" id="description" name="description" class="form-control" placeholder="Miêu tả" required value="<?= htmlspecialchars($product['description'] ?? '') ?>">
                 </div>
                 <div class="button mb-3">
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary" type="submit">Lưu sản phẩm</button>
-                        <button class="btn btn-primary" type="submit">Xóa sản phẩm</button>
-
+                        <button type="submit" class="btn btn-primary"><?= $isCreate ? 'Tạo sản phẩm' : 'Lưu sản phẩm' ?></button>
+                        <?php if (!$isCreate): ?>
+                            <a class="btn btn-primary" href="?act=delete-product&id=<?= $product['id'] ?>">Xóa sản phẩm</a>
+                        <?php endif; ?>
                     </div>
                 </div>
-
-
             </form>
         </div>
     </div>
