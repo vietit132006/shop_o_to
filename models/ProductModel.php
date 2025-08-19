@@ -68,4 +68,14 @@ class ProductModel
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    public function getDashboardByUserId($userId)
+    {
+        $sql = "SELECT * FROM `products` WHERE 1
+            AND user_id = :user_id
+            ORDER BY created_at DESC";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['user_id' => $userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

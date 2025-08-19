@@ -14,6 +14,12 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            background-image: url('https://c.wallhere.com/photos/5d/af/1680x1050_px_car_Mercedes_AMG_Mercedes_AMG_GT_Mercedes_Benz-538476.jpg!d');
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
 
         .register-box {
@@ -27,16 +33,23 @@
             margin-top: 8px;
 
         }
+
+        .form-label {
+            background: transparent !important;
+            color: #fff !important;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
     </style>
 </head>
 
 <body>
 
-    <div class="register-box">
-        <div class="p-3 mb-2 bg-info text-dark">
-            <h2 class="d-flex justify-content-center">Chỉnh sửa thông tin sản phẩm</h2>
+    <div class="register-box ">
+        <div class="p-3 mb-2 bg-info text-bg-dark  bg-black bg-success p-2 bg-opacity-10 rounded-2">
+            <h2 class="d-flex justify-content-center ">Chỉnh sửa thông tin sản phẩm</h2>
             <form>
-                <div class="mb-3">
+                <div class="mb-3 ">
                     <label for="exampleFormControlInput1" class="form-label">Tên sản phẩm</label>
                     <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Sản phẩm">
                 </div>

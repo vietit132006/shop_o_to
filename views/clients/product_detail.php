@@ -2,7 +2,7 @@
 $user_id = $_SESSION['user_id'] ?? null;
 ?>
 <div>
-    <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary bg-success p-2 text-dark bg-opacity-75">
         <div class="container-fluid">
             <a class="navbar-brand" href="?act=/"><i class="fa-solid fa-car"></i></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,9 +19,6 @@ $user_id = $_SESSION['user_id'] ?? null;
                     <li class="nav-item">
                         <a class="nav-link" href="#">Xe đã đặt</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-disabled="true">Disabled</a>
-                    </li>
                 </ul>
             </div>
             <div class="d-flex gap-2">
@@ -30,7 +27,7 @@ $user_id = $_SESSION['user_id'] ?? null;
                         Xin chào, <?= htmlspecialchars($_SESSION['name']) ?>
                     </span>
                 <?php endif; ?>
-                <a href="<?= (isset($_SESSION['username'])) ? "?act=register" : "?act=login" ?>" class="btn btn-secondary"><i class="fa-solid fa-shop mx-2"></i>Cửa hàng của bạn</a>
+                <a href="<?= (isset($_SESSION['user_id'])) ? "?act=dashboard" : "?act=login" ?>" class="btn btn-secondary"><i class="fa-solid fa-shop mx-2"></i>Cửa hàng của bạn</a>
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <a href="?act=logout" class="btn btn-outline-secondary ms-2"><i class="fa-solid fa-arrow-right-from-bracket mx-2"></i> Đăng xuất</a>
                 <?php else: ?>

@@ -1,6 +1,20 @@
+<style>
+   body {
+      margin: 0;
+      padding: 0;
+      background-image: url('https://giaxe60s.com/images/danhmuc/civiv-type-r.jpeg');
+      /* link ảnh */
+      background-size: cover;
+      /* Ảnh phủ kín */
+      background-repeat: no-repeat;
+      /* Không lặp */
+      background-position: center;
+      /* Canh giữa */
+   }
+</style>
 <form method="post" class="w-100 h-100 needs-validation">
-   <div class="d-flex justify-content-center align-items-center vh-100 vw-100" style="background-color: #1a1a1aff;">
-      <div class="d-flex flex-column p-3 text-light shadow-lg bg-dark rounded gap-3 mx-auto w-25">
+   <div class="d-flex justify-content-center align-items-center vh-100 vw-100">
+      <div class="d-flex flex-column p-3 text-light shadow-lg bg-dark bg-opacity-50 rounded gap-3 mx-auto w-25">
 
 
          <h2>Đăng ký</h2>
@@ -32,7 +46,7 @@
          </div>
          <div class="button">
             <div class="d-grid gap-2">
-               <button class="btn btn-primary" type="submit">Đăng ký</button>
+               <button class="btn btn-secondary" type="submit">Đăng ký</button>
                <a href="?act=login">Đã có tài khoản? Đăng nhập</a>
             </div>
          </div>

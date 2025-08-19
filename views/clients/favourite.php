@@ -18,15 +18,18 @@ $user_id = $_SESSION['user_id'] ?? null;
                         <a class="nav-link active" href="#">Xe ưa thích</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Xe đã đặt</a>
+                        <a class="nav-link" href="?act=orders">Xe đã đặt</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-disabled="true">Disabled</a>
-                    </li>
+
                 </ul>
             </div>
             <div class="d-flex gap-2">
-                <a href="<?= (isset($_SESSION['username'])) ? "?act=register" : "?act=login" ?>" class="btn btn-secondary"><i class="fa-solid fa-shop mx-2"></i>Cửa hàng của bạn</a>
+                <?php if (isset($_SESSION['name'])): ?>
+                    <span class="navbar-text text-secondary">
+                        Xin chào, <?= htmlspecialchars($_SESSION['name']) ?>
+                    </span>
+                <?php endif; ?>
+                <a href="<?= (isset($_SESSION['user_id'])) ? "?act=dashboard" : "?act=login" ?>" class="btn btn-secondary"><i class="fa-solid fa-shop mx-2"></i>Cửa hàng của bạn</a>
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <a href="?act=logout" class="btn btn-outline-secondary ms-2"><i class="fa-solid fa-arrow-right-from-bracket mx-2"></i> Đăng xuất</a>
                 <?php else: ?>

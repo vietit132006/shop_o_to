@@ -6,6 +6,7 @@ class ClientController
     public $colorModel;
     public $productModel;
     public $favoriusModel;
+    public $orderModel;
 
     public function __construct()
     {
@@ -13,6 +14,7 @@ class ClientController
         $this->colorModel = new ColorModel();
         $this->productModel = new ProductModel();
         $this->favoriusModel = new FavouritesModel();
+        $this->orderModel   = new OrderModel();
     }
 
     public function index()
@@ -22,6 +24,7 @@ class ClientController
         $status = $_GET['status'] ?? '';   // 1, 2 hoặc ''
         $brandIds = $_GET['brand_id'] ?? []; // Mảng brand_id
         $colorIds = $_GET['color_id'] ?? []; // Mảng color_id
+
 
         $favoriusModel = $this->favoriusModel;
         $brands = $this->brandModel->getAll();
@@ -77,6 +80,30 @@ class ClientController
         $favoriusModel = $this->favoriusModel;
         $title = "Sản phẩm yêu thích";
         $view = "clients/favourite";
+        require_once PATH_VIEW_MAIN;
+    }
+    public function order()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: ?act=login");
+            exit;
+        }
+        $userId = $_SESSION['user_id'];
+        $orders = $this->orderModel->getOrdersByUserId($userId);
+        $title = "Đơn hàng của bạn";
+        $view = "clients/order";
+        require_once PATH_VIEW_MAIN;
+    }
+    public function dashboard()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: ?act=login");
+            exit;
+        }
+        $userId = $_SESSION['user_id'];
+        $orders = $this->orderModel->getOrdersByUserId($userId);
+        $title = "Dashboard";
+        $view = "clients/dashboard";
         require_once PATH_VIEW_MAIN;
     }
 }

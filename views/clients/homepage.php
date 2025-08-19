@@ -1,10 +1,36 @@
+<style>
+  body {
+    background-color: #000000ff;
+
+    color: #fff !important;
+    /* toàn bộ chữ mặc định trắng */
+
+  }
+
+  .form-label {
+    background: transparent !important;
+    color: #fff !important;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  }
+
+  .card {
+    background-color: rgba(255, 255, 255, 0.26) !important;
+    /* trắng 50% */
+    color: #000;
+    /* chữ đen để rõ */
+
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    border: 1px solid #fff;
+    /* viền trắng */
+  }
+</style>
 <?php
 $user_id = $_SESSION['user_id'] ?? null;
 ?>
 
-
 <div>
-  <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary bg-success p-2 text-dark bg-opacity-75">
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><i class="fa-solid fa-car"></i></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,10 +45,7 @@ $user_id = $_SESSION['user_id'] ?? null;
             <a class="nav-link" href="?act=favourite">Xe ưa thích</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Xe đã đặt</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-disabled="true">Disabled</a>
+            <a class="nav-link" href="?act=orders">Xe đã đặt</a>
           </li>
         </ul>
       </div>
@@ -32,7 +55,7 @@ $user_id = $_SESSION['user_id'] ?? null;
             Xin chào, <?= htmlspecialchars($_SESSION['name']) ?>
           </span>
         <?php endif; ?>
-        <a href="<?= (isset($_SESSION['username'])) ? "?act=register" : "?act=login" ?>" class="btn btn-secondary"><i class="fa-solid fa-shop mx-2"></i>Cửa hàng của bạn</a>
+        <a href="<?= (isset($_SESSION['user_id'])) ? "?act=dashboard" : "?act=login" ?>" class="btn btn-secondary"><i class="fa-solid fa-shop mx-2"></i>Cửa hàng của bạn</a>
         <?php if (isset($_SESSION['user_id'])): ?>
           <a href="?act=logout" class="btn btn-outline-secondary ms-2"><i class="fa-solid fa-arrow-right-from-bracket mx-2"></i> Đăng xuất</a>
         <?php else: ?>
@@ -60,7 +83,7 @@ $user_id = $_SESSION['user_id'] ?? null;
   <div class="container-fluid p-3" id="main-content">
     <div class="row">
       <div class="col-md-2 col-lg-3">
-        <h5>Bộ lọc sản phẩm</h5>
+        <h5 class="text-light">Bộ lọc sản phẩm</h5>
         <form method="GET" action="#main-content" id="filter-form">
           <div class="filter">
             <div class="mb-3">
@@ -70,8 +93,8 @@ $user_id = $_SESSION['user_id'] ?? null;
             <div class="mb-3">
               <label for="gia" class="form-label">Sắp xếp giá</label>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="sort" id="default" value='' <?= (!isset($_GET['sort']) || $_GET['sort'] == '') ? 'checked' : '' ?>>
-                <label class="form-check-label" for="default">
+                <input class="form-check-input " type="radio" name="sort" id="default" value='' <?= (!isset($_GET['sort']) || $_GET['sort'] == '') ? 'checked' : '' ?>>
+                <label class="form-check-label " for="default">
                   Mặc định
                 </label>
               </div>
@@ -151,7 +174,11 @@ $user_id = $_SESSION['user_id'] ?? null;
                         <p class="card-text text-danger fw-bold"><?= number_format($product['price'], 0, ',', '.') ?> VNĐ</p>
                       </div>
                       <div class="d-flex justify-content-between">
-                        <a class="btn btn-primary btn-sm ">Liên hệ ngay</a>
+                        <a href="?act=order<?= $product['id'] ?>"
+                          class="btn btn-primary">
+                          Liên hệ ngay
+                        </a>
+
                         <a href="?act=toggle-favorite&product_id=<?= $product['id'] ?>&redirect=<?= urlencode($_SERVER['REQUEST_URI']) ?>#product-<?= $product['id'] ?>" class=" btn-outline-danger btn-sm">
                           <i class="<?= ($isFavorius) ? "fa-solid" : "fa-regular" ?>  fa-heart"></i>
                         </a>
@@ -174,3 +201,4 @@ $user_id = $_SESSION['user_id'] ?? null;
 
     </footer>
   </div>
+</div>
