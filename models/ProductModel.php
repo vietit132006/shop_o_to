@@ -70,9 +70,7 @@ class ProductModel
     }
     public function getDashboardByUserId($userId)
     {
-        $sql = "SELECT * FROM `products` WHERE 1
-            AND user_id = :user_id
-            ORDER BY created_at DESC";
+        $sql = "SELECT products.image, products.name, products.price FROM `products` WHERE 1=1";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->execute(['user_id' => $userId]);

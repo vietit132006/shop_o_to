@@ -11,7 +11,6 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 require_once './controllers/ClientController.php';
 require_once './controllers/AuthController.php';
 require_once './controllers/AdminController.php';
-require_once './controllers/OrderController.php';
 
 // Require toàn bộ file Models
 require_once './models/ProductModel.php';
@@ -50,12 +49,10 @@ match ($act) {
     'sign_up' => (new AuthController())->signUp(),
 
     // Trang đơn hàng (dùng OrderController)
-    'orders' => (new OrderController())->index(),
+    'orders' => (new ClientController())->order(),
 
     // Thêm đơn hàng (gọi khi ấn nút đặt hàng)
-    'add-order' => (new OrderController())->add($_GET['product_id'] ?? null),
-
-
+    'add-order' => (new ClientController())->addOrder(),
 
     //Trang dashboard
     'dashboard' => (new AdminController())->index(),

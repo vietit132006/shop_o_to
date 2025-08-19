@@ -82,6 +82,7 @@ class ClientController
         $view = "clients/favourite";
         require_once PATH_VIEW_MAIN;
     }
+
     public function order()
     {
         if (!isset($_SESSION['user_id'])) {
@@ -91,19 +92,30 @@ class ClientController
         $userId = $_SESSION['user_id'];
         $orders = $this->orderModel->getOrdersByUserId($userId);
         $title = "Đơn hàng của bạn";
-        $view = "clients/order";
+        $view = "clients/orders";
         require_once PATH_VIEW_MAIN;
     }
-    public function dashboard()
+
+    // Thêm đơn hàng (gọi khi ấn nút đặt hàng)
+    public function addOrder($productId = null)
     {
         if (!isset($_SESSION['user_id'])) {
             header("Location: ?act=login");
             exit;
         }
+
+        $product_id = $_GET['product_id'];
+
+        if (!$productId) {
+            $_SESSION['error'] = "ID sản phẩm không hợp lệ!";
+            header("Location: ?act=orders");
+            exit;
+        }
+
         $userId = $_SESSION['user_id'];
-        $orders = $this->orderModel->getOrdersByUserId($userId);
-        $title = "Dashboard";
-        $view = "clients/dashboard";
-        require_once PATH_VIEW_MAIN;
+
+        $result = $this->orderModel->addOrder($userId, $productId);
+        header("Location: ?act=orders");
+        exit;
     }
 }

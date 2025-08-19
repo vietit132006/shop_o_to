@@ -174,7 +174,7 @@ $user_id = $_SESSION['user_id'] ?? null;
                         <p class="card-text text-danger fw-bold"><?= number_format($product['price'], 0, ',', '.') ?> VNĐ</p>
                       </div>
                       <div class="d-flex justify-content-between">
-                        <a href="?act=order<?= $product['id'] ?>"
+                        <a href="?act=add-order&product_id=<?= $product['id'] ?>"
                           class="btn btn-primary">
                           Liên hệ ngay
                         </a>
